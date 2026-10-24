@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Inspiration</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #f3e7ff, #e3f0ff);
+      color: #35234a;
+      text-align: center;
+      padding: 60px 15px;
+    }
+    .card {
+      max-width: 450px;
+      margin: auto;
+      padding: 30px 20px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px #0002;
+    }
+    h1 { color: #7138a8; }
+    #quote { font-size: 21px; margin: 25px 0; }
+    button {
+      padding: 12px 20px;
+      background: #7138a8;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Daily Inspiration</h1>
+    <p id="quote">Believe in yourself!</p>
+    <p id="author">— Unknown</p>
+    <button onclick="changeQuote()">New Quote 💜</button>
+  </div>
+
+  <script>
+    const quotes = [
+      { text: "Believe in yourself!", author: "Unknown" },
+      { text: "Great things take time!", author: "Unknown" },
+      { text: "Dream big and work hard!", author: "Unknown" },
+      { text: "Never stop learning!", author: "Unknown" },
+      { text: "Every day is a new beginning!", author: "Unknown" },
+      { text: "It always seems impossible until it's done.", author: "Nelson Mandela" },
+      { text: "The future depends on what you do today.", author: "Mahatma Gandhi" }
+    ];
+
+    let previousIndex = -1;
+
+    function changeQuote() {
+      let i;
+      do {
+        i = Math.floor(Math.random() * quotes.length);
+      } while (i === previousIndex);
+      previousIndex = i;
+      document.getElementById("quote").textContent = quotes[i].text;
+      document.getElementById("author").textContent = "— " + quotes[i].author;
+    }
+
+    changeQuote();
+  </script>
+</body>
+</html>
