@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Flashcard Quiz App</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #eeeaff;
+    text-align: center;
+    padding: 20px;
+}
+
+h1 {
+    color: #5935a5;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin: 20px auto;
+    max-width: 400px;
+    box-shadow: 0 3px 10px #bbb;
+}
+
+button {
+    background: #7046c5;
+    color: white;
+    border: none;
+    padding: 12px;
+    margin: 5px;
+    border-radius: 8px;
+}
+
+input {
+    padding: 10px;
+    margin: 5px;
+    width: 80%;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Flashcard Quiz App 💜</h1>
+<p>Learn and test your knowledge!</p>
+
+<div class="card">
+<h2 id="question"></h2>
+<p id="answer">Click Show Answer</p>
+<button onclick="showAnswer()">Show Answer</button>
+</div>
+
+<button onclick="previous()">Previous</button>
+<button onclick="next()">Next</button>
+
+<h3>Add New Flashcard</h3>
+
+<input id="newQ" placeholder="Enter Question">
+<br>
+<input id="newA" placeholder="Enter Answer">
+<br><br>
+
+<button onclick="addCard()">Add Card</button>
+<button onclick="editCard()">Edit Card</button>
+<button onclick="deleteCard()">Delete Card</button>
+
+<script>
+let cards = [
+{q:"What is HTML?",a:"HyperText Markup Language"},
+{q:"What is CSS?",a:"Cascading Style Sheets"},
+{q:"What is JavaScript?",a:"A programming language"}
+];
+
+let index = 0;
+
+function displayCard() {
+document.getElementById("question").innerText = cards[index].q;
+document.getElementById("answer").innerText = "Click Show Answer";
+}
+
+function showAnswer() {
+document.getElementById("answer").innerText = cards[index].a;
+}
+
+function next() {
+index = (index + 1) % cards.length;
+displayCard();
+}
+
+function previous() {
+index = (index - 1 + cards.length) % cards.length;
+displayCard();
+}
+
+function addCard() {
+let q = document.getElementById("newQ").value.trim();
+let a = document.getElementById("newA").value.trim();
+
+if (!q || !a) {
+alert("Enter both fields!");
+return;
+}
+
+cards.push({q:q, a:a});
+index = cards.length - 1;
+displayCard();
+alert("Card Added!");
+}
+
+function editCard() {
+let q = document.getElementById("newQ").value.trim();
+let a = document.getElementById("newA").value.trim();
+
+if (!q || !a) {
+alert("Enter both fields!");
+return;
+}
+
+cards[index] = {q:q, a:a};
+displayCard();
+alert("Card Updated!");
+}
+
+function deleteCard() {
+if (cards.length === 1) {
+alert("At least one card is required!");
+return;
+}
+
+cards.splice(index, 1);
+index = 0;
+displayCard();
+alert("Card Deleted!");
+}
+
+displayCard();
+</script>
+
+</body>
+</html>
+
